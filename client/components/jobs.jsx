@@ -34,8 +34,8 @@ Leaderboard2 = React.createClass({
       <ListItem key={player._id}
     primaryText={player.name}
     onClick={this.selectPlayer.bind(this, player._id)}
-    leftAvatar={<Avatar src={'/' + player.name + '.png'}/>}
-    secondaryText={'Current score: ' + player.score}
+    leftAvatar={<Avatar src={player.image}/>}
+    secondaryText={player.description}
     style={style}/>,
   <ListDivider/>
   ];
@@ -62,8 +62,8 @@ Jobs = React.createClass({
   },
   getMeteorData() {
     return {
-      players: Coll.Players.find({}, { sort: { score: -1, name: 1 } }).fetch(),
-      selectedPlayer: Coll.Players.findOne(this.state.selectedPlayerId)
+      players: Coll.Jobs.find({}, { sort: { score: -1, name: 1 } }).fetch(),
+      selectedPlayer: Coll.Jobs.findOne(this.state.selectedPlayerId)
     }
   },
   selectPlayer(playerId) {
@@ -72,7 +72,7 @@ Jobs = React.createClass({
     });
   },
   addPointsToPlayer(playerId) {
-    Coll.Players.update(playerId, {$inc: {score: 5}});
+    Coll.Jobs.update(playerId, {$inc: {score: 5}});
   },
   getBottomBar() {
     return this.state.selectedPlayerId
@@ -94,7 +94,7 @@ Jobs = React.createClass({
       <div className="outer">
       <h1 className="title">Jobs</h1>
       <div className="subtitle">Select a job to see details</div>
-    <Leaderboard players={this.data.players}
+    <Leaderboard2 players={this.data.players}
     selectedPlayerId={this.state.selectedPlayerId}
     onPlayerSelected={this.selectPlayer} />
   </div>

@@ -92,7 +92,7 @@ Candidates = React.createClass({
   render() {
     return (
       <div className="outer">
-      <h1 className="title">Jobs</h1>
+      <h1 className="title">Candidates</h1>
       <div className="subtitle">Select a candidate to see details</div>
     <Leaderboard players={this.data.players}
     selectedPlayerId={this.state.selectedPlayerId}

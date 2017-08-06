@@ -15,7 +15,6 @@ Chowk = React.createClass({
   render() {
     return (
       <div className="outer">
-        <div className="logo"></div>
         <h1 className="title">Chain Chowk</h1>
         <div className="subtitle">Make a selection</div>
         <List>
