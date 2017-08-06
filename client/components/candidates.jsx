@@ -4,7 +4,48 @@ const {
 } = mui;
 const ThemeManager = Styles.ThemeManager;
 
-App = React.createClass({
+const {
+  List,
+  ListItem,
+  ListDivider,
+  Avatar
+} = mui;
+
+Leaderboard2 = React.createClass({
+  propTypes: {
+    selectedPlayerId: React.PropTypes.string,
+    players: React.PropTypes.array.isRequired,
+    onPlayerSelected: React.PropTypes.func
+  },
+  selectPlayer(playerId) {
+    this.props.onPlayerSelected(playerId);
+  },
+  render() {
+    return (
+      <List>
+      {this.props.players.map((player) => {
+        let style = {};
+
+    if (this.props.selectedPlayerId === player._id) {
+      style['backgroundColor'] = '#eee';
+    }
+
+    return [
+      <ListItem key={player._id}
+    primaryText={player.name}
+    onClick={this.selectPlayer.bind(this, player._id)}
+    leftAvatar={<Avatar src={'/' + player.name + '.png'}/>}
+    secondaryText={'Current score: ' + player.score}
+    style={style}/>,
+  <ListDivider/>
+  ];
+  })}
+  </List>
+  );
+  }
+});
+
+Candidates = React.createClass({
   mixins: [ReactMeteorData],
   getInitialState: function () {
     return {
@@ -51,9 +92,8 @@ App = React.createClass({
   render() {
     return (
       <div className="outer">
-      <div className="logo"></div>
-      <h1 className="title">Leaderboard</h1>
-      <div className="subtitle">Select a scientist to give them points</div>
+      <h1 className="title">Jobs</h1>
+      <div className="subtitle">Select a candidate to see details</div>
     <Leaderboard players={this.data.players}
     selectedPlayerId={this.state.selectedPlayerId}
     onPlayerSelected={this.selectPlayer} />

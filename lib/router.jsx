@@ -21,15 +21,29 @@ FlowRouter.route('/leaderboard', {
 });
 
 
-FlowRouter.route('/employees', {
+FlowRouter.route('/candidates', {
+  action: function(params, queryParams) {
+    ReactLayout.render(Candidates);
+  }
+});
+
+
+
+FlowRouter.route('/employers', {
   action: function(params, queryParams) {
     ReactLayout.render(App);
   }
 });
 
 
-FlowRouter.route('/employers', {
+FlowRouter.route('/jobs', {
   action: function(params, queryParams) {
-    ReactLayout.render(App);
+    ReactLayout.render(Jobs);
+  }
+});
+
+FlowRouter.route('/', {
+  action: function(params, queryParams) {
+    ReactLayout.render(Chowk);
   }
 });
