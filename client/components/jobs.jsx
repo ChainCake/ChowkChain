@@ -97,7 +97,6 @@ Jobs = React.createClass({
     <Leaderboard players={this.data.players}
     selectedPlayerId={this.state.selectedPlayerId}
     onPlayerSelected={this.selectPlayer} />
-    {this.getBottomBar()}
   </div>
   )
   }
