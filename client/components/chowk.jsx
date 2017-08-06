@@ -21,6 +21,8 @@ Chowk = React.createClass({
           <ListItem key='jobs' primaryText={"Jobs"} onClick={()=>{FlowRouter.go('/jobs');}}/>
           <ListDivider/>
           <ListItem key='candidates' primaryText={"Candidates"} onClick={()=>{FlowRouter.go('/candidates');}}/>
+          <ListDivider/>
+          <ListItem key='postajob' primaryText={"Post a job"} />
         </List>
       </div>
 

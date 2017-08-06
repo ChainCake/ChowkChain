@@ -35,7 +35,7 @@ Leaderboard2 = React.createClass({
     primaryText={player.name}
     onClick={this.selectPlayer.bind(this, player._id)}
     leftAvatar={<Avatar src={'/' + player.name + '.png'}/>}
-    secondaryText={'Current score: ' + player.score}
+    secondaryText={'Overall rating: ' + player.score}
     style={style}/>,
   <ListDivider/>
   ];
@@ -62,8 +62,8 @@ Candidates = React.createClass({
   },
   getMeteorData() {
     return {
-      players: Coll.Players.find({}, { sort: { score: -1, name: 1 } }).fetch(),
-      selectedPlayer: Coll.Players.findOne(this.state.selectedPlayerId)
+      players: Coll.Candidates.find({}, { sort: { score: -1, name: 1 } }).fetch(),
+      selectedPlayer: Coll.Candidates.findOne(this.state.selectedPlayerId)
     }
   },
   selectPlayer(playerId) {
@@ -72,22 +72,24 @@ Candidates = React.createClass({
     });
   },
   addPointsToPlayer(playerId) {
-    Coll.Players.update(playerId, {$inc: {score: 5}});
+    Coll.Candidates.update(playerId, {$inc: {score: 5}});
   },
   getBottomBar() {
     return this.state.selectedPlayerId
       ? (
       <div className="details">
         <div className="name">{this.data.selectedPlayer.name}</div>
+        <div className="description">{this.data.selectedPlayer.description}</div>
+        <p className="jobdetails">{this.data.selectedPlayer.details}</p>
     <RaisedButton
     onClick={this.addPointsToPlayer.bind(
       this, this.state.selectedPlayerId)}
     style={{float: "right"}}
-    label="Add 5 points"
+    label="Invite for interview"
     primary={true}/>
       </div>
   )
-  : <div className="message">Click a player to select</div>;
+  : <div className="message">Click a candidate to select</div>;
   },
   render() {
     return (
@@ -97,6 +99,7 @@ Candidates = React.createClass({
     <Leaderboard players={this.data.players}
     selectedPlayerId={this.state.selectedPlayerId}
     onPlayerSelected={this.selectPlayer} />
+    {this.getBottomBar()}
   </div>
   )
   }

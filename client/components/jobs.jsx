@@ -79,15 +79,17 @@ Jobs = React.createClass({
       ? (
       <div className="details">
         <div className="name">{this.data.selectedPlayer.name}</div>
+        <div className="description">{this.data.selectedPlayer.description}</div>
+        <p className="jobdetails">{this.data.selectedPlayer.details}</p>
     <RaisedButton
     onClick={this.addPointsToPlayer.bind(
       this, this.state.selectedPlayerId)}
     style={{float: "right"}}
-    label="Add 5 points"
+    label="Apply"
     primary={true}/>
       </div>
   )
-  : <div className="message">Click a player to select</div>;
+  : <div className="message">Click a job to select</div>;
   },
   render() {
     return (
@@ -97,6 +99,7 @@ Jobs = React.createClass({
     <Leaderboard2 players={this.data.players}
     selectedPlayerId={this.state.selectedPlayerId}
     onPlayerSelected={this.selectPlayer} />
+    {this.getBottomBar()}
   </div>
   )
   }

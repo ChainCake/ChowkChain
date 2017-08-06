@@ -91,6 +91,10 @@ body {
   margin-top: 1em;
 }
 
+.jobdetails {
+  font-size: 12px;
+}
+
 @media (max-width: 500px) {
   .details, .message {
     display: block;
