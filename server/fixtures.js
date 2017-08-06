@@ -49,3 +49,5 @@ if (db2.find().count() === 0) {
     db2.insert({name: names[i], score: Math.floor(Math.random() * 10) * 5});
   }
 }
+
+

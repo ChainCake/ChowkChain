@@ -24,7 +24,7 @@ Chowk = React.createClass({
           <ListDivider/>
           <ListItem key='jobcompletion' primaryText={"Mark job completion"} onClick={()=>{FlowRouter.go('/jobcompletion');}}/>
           <ListDivider/>
-          <ListItem key='postajob' primaryText={"Post a job"} />
+          <ListItem key='postajob' primaryText={"Post a job"}  onClick={()=>{alert('Please request permission to post a job');}}/>
         </List>
       </div>
 

@@ -1,3 +1,4 @@
+
 const {
   RaisedButton,
   Styles
@@ -10,6 +11,8 @@ const {
   ListDivider,
   Avatar
 } = mui;
+
+const water = 'e259c518-5b38-4cf6-8dfd-9b646ff7f9b5';
 
 Leaderboard4 = React.createClass({
   propTypes: {
@@ -72,6 +75,15 @@ JobCompletion = React.createClass({
     });
   },
   addPointsToPlayer(playerId) {
+    const app_uid='f0ad94fd-2f51-4328-82f6-bcf6096d289c';
+    let url = 'https://mobius.network/api/v1/app_store/balance?api_key='+water+'&app_uid='+app_uid+'&email=alltheseletters@gmail.com'
+    console.log('url ', url);
+    Meteor.call("req", url, function(error, results) {
+      console.log(results.content); //results.data should be a JSON object
+      const balance = JSON.parse(results.content).num_credits;
+      alert('your balance is ' + balance);
+    });
+
     Coll.Jobs.update(playerId, {$inc: {score: 5}});
     alert('Job is marked complete!');
   },
