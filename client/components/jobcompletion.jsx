@@ -81,11 +81,10 @@ JobCompletion = React.createClass({
     Meteor.call("req", url, function(error, results) {
       console.log(results.content); //results.data should be a JSON object
       const balance = JSON.parse(results.content).num_credits;
-      alert('your balance is ' + balance);
+      alert('Job is marked complete and payment sent! Your balance is ' + balance);
     });
 
     Coll.Jobs.update(playerId, {$inc: {score: 5}});
-    alert('Job is marked complete!');
   },
   getBottomBar() {
     return this.state.selectedPlayerId
