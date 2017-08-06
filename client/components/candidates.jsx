@@ -11,7 +11,7 @@ const {
   Avatar
 } = mui;
 
-Leaderboard2 = React.createClass({
+Leaderboard3 = React.createClass({
   propTypes: {
     selectedPlayerId: React.PropTypes.string,
     players: React.PropTypes.array.isRequired,
@@ -96,7 +96,7 @@ Candidates = React.createClass({
       <div className="outer">
       <h1 className="title">Candidates</h1>
       <div className="subtitle">Select a candidate to see details</div>
-    <Leaderboard players={this.data.players}
+    <Leaderboard3 players={this.data.players}
     selectedPlayerId={this.state.selectedPlayerId}
     onPlayerSelected={this.selectPlayer} />
     {this.getBottomBar()}
