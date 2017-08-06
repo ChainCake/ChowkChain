@@ -73,6 +73,7 @@ Jobs = React.createClass({
   },
   addPointsToPlayer(playerId) {
     Coll.Jobs.update(playerId, {$inc: {score: 5}});
+    alert('Thank you for applying.');
   },
   getBottomBar() {
     return this.state.selectedPlayerId

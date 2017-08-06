@@ -11,7 +11,7 @@ const {
   Avatar
 } = mui;
 
-Leaderboard3 = React.createClass({
+Leaderboard4 = React.createClass({
   propTypes: {
     selectedPlayerId: React.PropTypes.string,
     players: React.PropTypes.array.isRequired,
@@ -34,8 +34,8 @@ Leaderboard3 = React.createClass({
       <ListItem key={player._id}
     primaryText={player.name}
     onClick={this.selectPlayer.bind(this, player._id)}
-    leftAvatar={<Avatar src={'/' + player.name + '.png'}/>}
-    secondaryText={'Reputation: ' + player.score}
+    leftAvatar={<Avatar src={player.image}/>}
+    secondaryText={player.description}
     style={style}/>,
   <ListDivider/>
   ];
@@ -45,7 +45,7 @@ Leaderboard3 = React.createClass({
   }
 });
 
-Candidates = React.createClass({
+JobCompletion = React.createClass({
   mixins: [ReactMeteorData],
   getInitialState: function () {
     return {
@@ -62,8 +62,8 @@ Candidates = React.createClass({
   },
   getMeteorData() {
     return {
-      players: Coll.Candidates.find({}, { sort: { score: -1, name: 1 } }).fetch(),
-      selectedPlayer: Coll.Candidates.findOne(this.state.selectedPlayerId)
+      players: Coll.Jobs.find({}, { sort: { score: -1, name: 1}, limit: 1} ).fetch(),
+      selectedPlayer: Coll.Jobs.findOne(this.state.selectedPlayerId)
     }
   },
   selectPlayer(playerId) {
@@ -72,32 +72,32 @@ Candidates = React.createClass({
     });
   },
   addPointsToPlayer(playerId) {
-    Coll.Candidates.update(playerId, {$inc: {score: 5}});
-    alert('Thank you for inviting.');
+    Coll.Jobs.update(playerId, {$inc: {score: 5}});
+    alert('Job is marked complete!');
   },
   getBottomBar() {
     return this.state.selectedPlayerId
       ? (
       <div className="details">
         <div className="name">{this.data.selectedPlayer.name}</div>
-        <div className="description">{this.data.selectedPlayer.description}</div>
-        <p className="jobdetails">{this.data.selectedPlayer.details}</p>
+    <div className="description">{this.data.selectedPlayer.description}</div>
+    <p className="jobdetails">{this.data.selectedPlayer.details}</p>
     <RaisedButton
     onClick={this.addPointsToPlayer.bind(
       this, this.state.selectedPlayerId)}
     style={{float: "right"}}
-    label="Invite for interview"
+    label="Mark complete"
     primary={true}/>
       </div>
   )
-  : <div className="message">Click a candidate to select</div>;
+  : <div className="message">Click a job to select</div>;
   },
   render() {
     return (
       <div className="outer">
-      <h1 className="title">Candidates</h1>
-      <div className="subtitle">Select a candidate to see details</div>
-    <Leaderboard3 players={this.data.players}
+      <h1 className="title">Jobs in Progress</h1>
+      <div className="subtitle">Select a job to mark progress</div>
+    <Leaderboard4 players={this.data.players}
     selectedPlayerId={this.state.selectedPlayerId}
     onPlayerSelected={this.selectPlayer} />
     {this.getBottomBar()}

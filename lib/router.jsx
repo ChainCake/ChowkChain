@@ -42,6 +42,12 @@ FlowRouter.route('/jobs', {
   }
 });
 
+FlowRouter.route('/jobcompletion', {
+  action: function(params, queryParams) {
+    ReactLayout.render(JobCompletion);
+  }
+});
+
 FlowRouter.route('/', {
   action: function(params, queryParams) {
     ReactLayout.render(Chowk);
